@@ -34,31 +34,52 @@ main {
   align-items: stretch;
 }
 
+
 #aside_featured_img {
   width: 50%;
+
+  overflow: hidden;
+  height: 770px;
 }
+
+#featured_img {
+  width: auto;
+  height: auto;
+  max-width: 790px;
+  max-height: 660px;
+}
+
 
 #elems_index {
   width: 50%;
   border-left: 2px solid;
+}
+
+#featured_elem_title {
   padding-left: 10px;
 }
 
 #elems_container {
+  height: calc(100vh - 260px);
   overflow-y: auto;
-  height: 100%;
   background-color: red;
 }
 
 p.featured_elem {
-text-align: center;
+  padding-left: 10px;
+  text-align: center;
   display: flex;
   align-items: center;
+}
+
+img.featured_list_image {
+  
 }
 
 a.elem_title {
   margin-left: 15px;
 }
+
 
 footer {
   position: fixed;
