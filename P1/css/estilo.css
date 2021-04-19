@@ -1,0 +1,83 @@
+@media (max-width: 800px) {
+  .hide-tablet {
+    display: none !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+html {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+
+  font-family: "Trirong";
+  cursor: default;
+  user-select: none;
+}
+
+.header_and_footer {
+  font-weight: bold;
+  font-size: 16px;
+  color: #26081C;
+  background-color: #4F5D75;
+}
+
+img {
+  border-radius: 10px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+}
+
+#logo {
+  padding-left: 20px;
+  max-height: 70px;
+}
+
+nav {
+  background-color: #ADB6C4;
+  height: 30px;
+}
+
+.blue-button {
+  padding: 0px 20px;
+  margin: 2px 30px;
+  border-radius: 10px;
+  background-color: #ADB6C4;
+  font-size: 15px;
+}
+.blue-button:hover {
+  background-color: #4F5D75;
+  cursor: pointer;
+}
+
+a .nav_section_button {
+  margin-right: 5px;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  font-size: 13px;
+  text-align: center;
+}
