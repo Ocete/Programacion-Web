@@ -115,6 +115,17 @@ Fijaremos el *footer* a la parte inferior izquierda de la pantalla para que su p
 }
  ```
 
+#### Estilo de links
+
+Los links por defecto adoptan distintos colores según se hayan utilizado o no. Esos colores no encajan con neustra paleta de color así que los quitaremos. Adicionalmente quitamos el subrayado por defecto:
+
+```
+a {text-decoration: none;}
+a:link {color: black;}
+a:visited {color: black;}
+a:active {color: black;}
+```
+
 ### 1. index.html
 
 Este es el primer documento html de la práctica y uno de los más importantes. En él he puesto en práctica muchas de las técnicas que luego aplicaremos en el resto de documentos asi serán explicadas en profundidad en este apartado.
@@ -241,3 +252,17 @@ Puesto que la cabecera sigue ocupando demasiado espacio la ponemos en formato co
   }
 }
 ```
+
+### 2. sitioweb.html
+
+Esta página es prácticamente igual que la anterior. Merece la pena remarcar que nuestro logo tiene un link a la página principal tras habernos loggeado en todas las páginas, excepto en la página inicial `index.html`, donde es un link a si misma.
+
+### 3. Secciones (seccionk.html)
+
+Para el contenido principal de esta página utilizamos una *flexbox* en horizontal para establecer tres columnas, `main_page_container`. Dentro de dicha caja colocamos tres `aside`s, `column_container`. Estas serán flexbox en dirección columna. De esta forma lo que conseguimos es que las tres columnas tengan siempre anchura fija, `32%` de la anchura de la página, mientras que los elementos en cada columna pueden variar de altura sin afectar a la verticalidad. Dentro de cada columna colocamos tres elemenos `movie_box` que contienen la imagen y el texto de cada película.
+
+A si mismo, cada `movie_box` es una *flexbox* con dos componentes: la imagen, y un contenedor para el texto. El contenedor para el texto vuelve a ser una *flexbox* columna. De esta forma podemos centrar el texto dentro de su columna sin afectar a la imagen y, al mismo tiempo, no desperdiciar espacio.
+
+Hay un par de detalles adicionales que merece la pena mencionar. La barra de navegación inferior vuelve a ser una *flexbox* para centrar y espaciar correctamente los elementos. Al haber sólo tres secciones, las opciones de adelante y atrás son circulares. Así mismo, el número de la sección en la que estamos se marca en negrita utilizando la clase `bold`.
+
+Finalmente, hemos utilizado *SVG*s para las flechas de izquierda y derecha en vez de imágenes. Para los símbolos de una página web suele ser aconsejable utilizar este tipo de elementos. Están definidos geométricamente en vez de pixel a pixel. Esto provoca que apenas consuman memoria y que su resolución no se reduzca al ampliarlos.

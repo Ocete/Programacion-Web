@@ -15,6 +15,7 @@ html {
   padding: 0px;
   height: 100%;
   width: 100%;
+  color: #26081C;
 }
 
 body {
@@ -25,6 +26,14 @@ body {
   font-family: "Trirong";
   cursor: default;
   user-select: none;
+}
+
+main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  background-color: #FFEFD3;
 }
 
 .header_and_footer {
@@ -71,6 +80,45 @@ nav {
 a .nav_section_button {
   margin-right: 5px;
 }
+
+a {text-decoration: none;}
+a:link {color: black;}
+a:visited {color: black;}
+a:active {color: black;}
+
+
+.movie_box {
+  margin: 10px 25px;
+  padding: 5px;
+  border-radius: 10px;
+
+  display: flex;
+  text-align: center;
+  align-items: center;
+  max-height: 200px;
+
+  background-color: #FFC49B;
+  transition: .2s;
+}
+.movie_box:hover {
+  background-color: #F19953;
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.movie_box_image {
+  max-height: 200px;
+  max-width: 250px;
+}
+
+a.movie_box_title {
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 2vw;
+  flex-grow: 1;
+}
+
+
 
 footer {
   position: fixed;
