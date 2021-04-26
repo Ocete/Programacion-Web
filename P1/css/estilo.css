@@ -86,6 +86,9 @@ a:link {color: black;}
 a:visited {color: black;}
 a:active {color: black;}
 
+.clickable:hover {
+  cursor: pointer;
+}
 
 .movie_box {
   margin: 10px 25px;
