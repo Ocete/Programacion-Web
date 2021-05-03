@@ -288,3 +288,48 @@ Esta página es muy sencilla, se ha definido el concepto de `orange-button` en `
 ### 6. contacto.html
 
 Muy parecido al anterior. Se ha creado un nuevo archivo *CSS* con apenas unas líneas de código. Personalmente creo que estos archivos con muy poco estilo que además no es particularmente generalizable deberían de ser incluidos en cada archivo utilizando `<style>`. No lo he hecho porque las directrices de la práctica van en contra de esta práctica de forma explícita.
+
+### 7. altaitem.html
+
+En esta página hemos creado un formulario para añadir nuevas series. He añadido campos de forma variada para probar con distintos tipos de inputs en un formulario. En cuando al estilo, por un lado el botón de `submit` lo hemos retocado para que se asemeje al resto de botones. Para ello utilizamos la clase `orange-button` ya definida y creamos una nueva, `submit_button`:
+
+```
+.submit_button {
+  margin-top: 2px;
+  margin-bottom: 5px;
+  vertical-align: center;
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px 20px;
+  border: none;
+}
+```
+
+Importante añadirla después que la clase `orange-button` en el archivo `estilo.css` para sobreescribir aquellos valores duplicados. Aprovechamos para dotar del mismo estilo al botón del formulario de `index.html`, esta vez combinando `blue-button` con `submit_button`.
+
+Para la subida de la imagen, este es un elemento cuyo estilo es muy complicado de manipular. Una forma sencilla es esconder por completo el elemento y usar su etiqueta asociada:
+
+```
+HTML:
+
+<label class="orange-button">
+  <input id="image" type="file" required/>
+  Seleccionar imagen
+</label>
+
+CSS:
+
+input[type="file"] {
+    display: none;
+}
+```
+
+Así dotamos a la etiqueta del estilo de un botón naranja y ocultamos el input. Sin embargo, perdemos la posibilidad de enseñar el archivo seleccionado. Esto se arregla con un poco de JS, pero aún no podemos hacerlo. Para este tipo de estilo me he ayudado de la siguiente referencia:
+
+https://stackoverflow.com/a/25825731/10128619
+
+Sabemos que se está seleccionando una imagen porque al poner el archivo como `required` no podemos enviar el formulario sin haberla seleccionado. La selección de archivo de `altausuario.html` tendrá un diseño distinto para poder ver el archivo seleccionado.
+
+### 8. altausuario.html
+
+TODO: Que no se te olvide añadir un link a este archivo desde index.html.

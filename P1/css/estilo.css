@@ -65,7 +65,6 @@ nav {
   height: 30px;
 }
 
-
 .blue-button {
   padding: 0px 20px;
   margin: 2px 30px;
@@ -88,6 +87,16 @@ nav {
 .orange-button:hover {
   background-color: #F19953;
   cursor: pointer;
+}
+
+.submit_button {
+  margin-top: 2px;
+  margin-bottom: 5px;
+  vertical-align: center;
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px 20px;
+  border: none;
 }
 
 

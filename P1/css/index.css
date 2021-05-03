@@ -17,13 +17,9 @@
   padding: 10px;
 }
 
-#send_button {
-  margin-top: 2px;
-  margin-bottom: 5px;
-  vertical-align: center;
-  cursor: pointer;
+form {
+  margin-right: 10px;
 }
-
 
 #main_page_container {
   flex-grow: 1;
