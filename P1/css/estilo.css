@@ -65,6 +65,7 @@ nav {
   height: 30px;
 }
 
+
 .blue-button {
   padding: 0px 20px;
   margin: 2px 30px;
@@ -76,6 +77,19 @@ nav {
   background-color: #4F5D75;
   cursor: pointer;
 }
+
+.orange-button {
+  padding: 0px 20px;
+  margin: 2px 30px;
+  border-radius: 10px;
+  background-color: #FFC49B;
+  font-size: 15px;
+}
+.orange-button:hover {
+  background-color: #F19953;
+  cursor: pointer;
+}
+
 
 a .nav_section_button {
   margin-right: 5px;
@@ -114,13 +128,12 @@ a:active {color: black;}
   max-width: 250px;
 }
 
-a.movie_box_title {
+.movie_box_title {
   margin-left: 15px;
   font-weight: bold;
   font-size: 2vw;
   flex-grow: 1;
 }
-
 
 
 footer {
@@ -131,4 +144,10 @@ footer {
 
   font-size: 13px;
   text-align: center;
+}
+
+
+
+.bold {
+  font-weight: bold;
 }

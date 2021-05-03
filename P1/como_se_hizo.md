@@ -263,6 +263,28 @@ Para el contenido principal de esta página utilizamos una *flexbox* en horizont
 
 A si mismo, cada `movie_box` es una *flexbox* con dos componentes: la imagen, y un contenedor para el texto. El contenedor para el texto vuelve a ser una *flexbox* columna. De esta forma podemos centrar el texto dentro de su columna sin afectar a la imagen y, al mismo tiempo, no desperdiciar espacio.
 
-Hay un par de detalles adicionales que merece la pena mencionar. La barra de navegación inferior vuelve a ser una *flexbox* para centrar y espaciar correctamente los elementos. Al haber sólo tres secciones, las opciones de adelante y atrás son circulares. Así mismo, el número de la sección en la que estamos se marca en negrita utilizando la clase `bold`.
+Hay un par de detalles adicionales que merece la pena mencionar. La barra de navegación inferior vuelve a ser una *flexbox* para centrar y espaciar correctamente los elementos. Las opciones de adelante y atrás son circulares. Así mismo, el número de la página dentre de la sección en la que estamos se marca en negrita utilizando la clase `bold`.
 
 Finalmente, hemos utilizado *SVG*s para las flechas de izquierda y derecha en vez de imágenes. Para los símbolos de una página web suele ser aconsejable utilizar este tipo de elementos. Están definidos geométricamente en vez de pixel a pixel. Esto provoca que apenas consuman memoria y que su resolución no se reduzca al ampliarlos.
+
+Cabe destarcar que se ha utilizado la clase `ghost` con `opactiy: 0.0;` para hacer que un objeto sea invisible pero siga ocupando espacio en la pantalla (diferencia fundamental respecto a `display: none;`). Esto hace que si estamos en la página 1 de la sección, la flecha izquierda no se muestre. Aún así, ocupa espacio, y al pasar a la página siguiente los números estarán centrados en el mismo sitio y ahora si aparecerá la flecha.
+
+### 4. item.html
+
+Esta página es bastante sencilla en comparación con las anteriores. Se utilizan de nuevo *flexboxs* para colocar el contenido donde queremos.
+
+Unicamente se han diseñado tres items:
+
+- Las Chicas del Cable
+- Friends
+- Como conocí a vuestra madre
+
+Cualquier objeto de la página que se clicke y no sea uno de estos tres te redirigirá a Las Chicas del Cable (`item1.html`). Además, al pulsar **Siguiente** repetidamente iteraremos sobre estos tres elementos. Finalmente, todos los links a estos objetos son a partir de la cajita naranja que rodea a cada elemento al completo, no solamente respecto al título o la imagen.
+
+### 5. administracion.html
+
+Esta página es muy sencilla, se ha definido el concepto de `orange-button` en `estilo.css` para poder utilizarlo también en los siguientes formularios. Adicionalmente, esta páguna tiene un poquitín de estilo para colocar los botones en su sitio y por ello he creado un nuevo archivo `administracion.css`.
+
+### 6. contacto.html
+
+Muy parecido al anterior. Se ha creado un nuevo archivo *CSS* con apenas unas líneas de código. Personalmente creo que estos archivos con muy poco estilo que además no es particularmente generalizable deberían de ser incluidos en cada archivo utilizando `<style>`. No lo he hecho porque las directrices de la práctica van en contra de esta práctica de forma explícita.

@@ -1,0 +1,11 @@
+h2 {
+  text-align: center;
+  margin: 0px 0px -10px 0px;
+  margin-top: 20px;
+}
+
+.admin_container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
