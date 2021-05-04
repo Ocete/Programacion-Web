@@ -64,6 +64,9 @@ h2 {
 .section_number {
   margin: 0px 20px;
 }
+.section_number:hover {
+  font-weight: bold;
+}
 
 .arrow {
   height: 10px;

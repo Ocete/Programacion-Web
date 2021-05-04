@@ -312,14 +312,14 @@ Para la subida de la imagen, este es un elemento cuyo estilo es muy complicado d
 ```
 HTML:
 
-<label class="orange-button">
+<label class="orange-button file_selector">
   <input id="image" type="file" required/>
   Seleccionar imagen
 </label>
 
 CSS:
 
-input[type="file"] {
+input[id="image_logo"] {
     display: none;
 }
 ```
@@ -332,4 +332,10 @@ Sabemos que se está seleccionando una imagen porque al poner el archivo como `r
 
 ### 8. altausuario.html
 
-TODO: Que no se te olvide añadir un link a este archivo desde index.html.
+Para la alta de usuario hacemos un formulario parecido al de alta de items utilizando nuevos tipos no vistos en el anterior: contraseña, email, teléfono, un rango y una URL.
+
+Como ya se comentó, para seleccionar archivo no se ha modificado el estilo en este formulario para poder comparar al anterior que sí estaba estilizado.
+
+Para introducir la URL hay que tener en cuenta que su verificación sigue el siguiente esquema: `urlscheme://restofurl`. Ejemplo: `https://ugr.es`. Fuente: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url#value
+
+Adicionalmente, se ha añadido un link desde la página `index.html` para que si no estás loggeado puedas crear un nuevo usuario.

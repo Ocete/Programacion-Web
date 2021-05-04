@@ -22,11 +22,12 @@ h2 {
   margin-left: 30px;
 }
 
-.image_selector {
-  width: 180px;
+.file_selector {
+  width: 250px;
+  text-align: center;
 }
 
-input[type="file"] {
+input[id="image_logo"] {
     display: none;
 }
 
