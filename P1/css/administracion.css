@@ -4,6 +4,13 @@ h2 {
   margin-top: 20px;
 }
 
+#header_form_container_logged {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
 .admin_container {
   display: flex;
   justify-content: space-around;

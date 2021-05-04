@@ -8,9 +8,9 @@ Empecemos explicando detalles de estilo comunes a toda la web. Profundizaremos e
 
 Mi web tiene 3 posibles estados:
 
-- Para pantallas de ordenador (anchura mayor de `800px`).
-- Para pantallas de tablets (anchura entre `800px` y `540px`).
-- Para pantallas de móbiles (anchura menor de `540px`).
+- Para pantallas de móbiles (anchura menor que `540px`).
+- Para pantallas de tablets (anchura entre `540px` y `800px`).
+- Para pantallas de ordenador (anchura mayor que `800px`).
 
 Para ello añadimos al CSS lo siguiente:
 
@@ -288,6 +288,8 @@ Esta página es muy sencilla, se ha definido el concepto de `orange-button` en `
 ### 6. contacto.html
 
 Muy parecido al anterior. Se ha creado un nuevo archivo *CSS* con apenas unas líneas de código. Personalmente creo que estos archivos con muy poco estilo que además no es particularmente generalizable deberían de ser incluidos en cada archivo utilizando `<style>`. No lo he hecho porque las directrices de la práctica van en contra de esta práctica de forma explícita.
+
+Sobre el contenido, debido a que subiré esta práctica a GitHub no he peusto información personal en este archivo.
 
 ### 7. altaitem.html
 

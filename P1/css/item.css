@@ -31,8 +31,8 @@ h2 {
 
 .movie_box_image {
   flex-grow: 6;
-  max-height: 300px;
-  max-width: 300px;
+  max-height: 500px;
+  max-width: 500px;
 }
 
 .label {
