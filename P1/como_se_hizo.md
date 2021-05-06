@@ -1,5 +1,7 @@
 # Práctica 1
 
+*Autor: José Antonio Álvarez Ocete*
+
 ### 0. Estilo común a toda la web
 
 Empecemos explicando detalles de estilo comunes a toda la web. Profundizaremos en algunos más adelante. El archivo de estilo común a toda la página se encuentra en `css/estilo.css`. No vamos a comentar todo el estilo de la página elemento a elemento, pero si las características más destacables que quizás no hemos explicado en clase o tienen mayor relevancia.
