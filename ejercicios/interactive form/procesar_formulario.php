@@ -7,7 +7,7 @@
                   'noGustaChocolate',
                   'rangoEdad',
                   'deporte',
-                  'comentarios'),
+                  'comentarios');
 
   foreach ( $campos as $campo ) {
     if ( isset( $_POST[$campo] ) ) {
@@ -15,5 +15,6 @@
     } else {
       echo 'Campo: '.$campo.' - no se introdujo';
     }
+    echo '<br>'
   }
 ?>
