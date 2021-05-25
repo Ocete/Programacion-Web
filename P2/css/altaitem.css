@@ -1,0 +1,36 @@
+.main {
+  height: 120%;
+}
+
+#header_form_container_logged {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+h2 {
+  text-align: center;
+  margin: 0px 0px -10px 0px;
+}
+
+
+.form_container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.file_selector {
+  width: 350px;
+  text-align: center;
+}
+
+input[id="image_logo"] {
+    display: none;
+}
+
+.smaller_form_container {
+  min-width: 500px;
+}
