@@ -1,0 +1,31 @@
+
+
+Table user {
+    username varchar(255) [pk]
+    name varchar(255)
+    password varchar(255)
+    email varchar(255)
+    phone int(9)
+    profile_picture_path varchar(255)
+}
+
+
+Table section {
+    section_id int [pk, increment]
+    name varchar(255)
+    primary key(section_id)
+}
+
+Table serie {
+    serie_id int [pk, increment]
+    section_id int
+    title varchar(255)
+    genre varchar(255)
+    n_temps int
+    platform varchar(255)
+    pegi_18 bool
+    premiere_date date
+    serie_picture_path varchar(255)
+}
+
+Ref: section.section_id < serie.serie_id
