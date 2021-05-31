@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<style>
+  img {
+    height: 500px;
+  }
+</style>
+
+
+  <body>
+
+    <img src="Mario.png" id="my_img"><br><br>
+
+    <button onclick="previous()">Anterior (rotatorio)</button>
+    <button onclick="next()">Siguiente (rotatorio)</button><br><br>
+
+    <button id="prev_button" onclick="previous()" disabled>Anterior</button>
+    <button id="next_button" onclick="next()">Siguiente</button>
+
+   </body>
+</html>
+
+<script>
+  const imgs = ["Mario.png", "Luigi.png", "Wario.png", "Waluigi.png"];
+  var index = 0;
+
+  function update() {
+    document.getElementById("my_img").src = imgs[index];
+
+    document.getElementById("prev_button").disabled = false;
+    document.getElementById("next_button").disabled = false;
+    if (index == 0) {
+      document.getElementById("prev_button").disabled = true;
+    } else if (index == 3) {
+      document.getElementById("next_button").disabled = true;
+    }
+  }
+
+  function previous() {
+    index = (index - 1 + 4) % 4;
+    update();
+  }
+
+  function next() {
+    index = (index + 1) % 4;
+    update();
+  }
+</script>
