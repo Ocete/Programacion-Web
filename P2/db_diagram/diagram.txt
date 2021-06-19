@@ -4,6 +4,7 @@ Table user {
     username varchar(255) [pk]
     name varchar(255)
     password varchar(255)
+    admin bool
     email varchar(255)
     phone int(9)
     profile_picture_path varchar(255)

@@ -23,10 +23,10 @@
     } else {
       echo 'Campo: '.$campo.' - no se introdujo';
     }
-    echo '<br>'
+    echo '<br>';
   }
 
-  echo '<br><br>'
+  echo '<br><br>';
 
   foreach ( $campos_requeridos as $campo ) {
     if ( !(isset( $_POST[$campo])) ) {
@@ -39,15 +39,15 @@
   }
 
   if ( empty(  $campos_requeridos_vacios) && $chocolate_rellenado ) {
-    echo 'Todos los campos han sido rellenados correctamente!'
+    echo 'Todos los campos han sido rellenados correctamente!';
   } else {
-    echo 'Los siguientes campos no han sido rellenados correctamente:'
-    echo '<br>'
+    echo 'Los siguientes campos no han sido rellenados correctamente:';
+    echo '<br>';
     foreach ( $campos_requeridos_vacios as $campo ) {
-      echo $campo.'<br>'
+      echo $campo.'<br>';
     }
     if (!$chocolate_rellenado) {
-      echo '¿Te gusta el chocolate?'
+      echo '¿Te gusta el chocolate?';
     }
   }
 
