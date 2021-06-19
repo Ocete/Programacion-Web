@@ -1,0 +1,23 @@
+<a> hola </a>
+
+<p> caracola </p>
+
+<p id="demo"> demo </p>
+
+ <script>
+  var x = document.getElementsByTagName("*");
+
+  my_dict = {};
+  for (var i = 0; i < x.length; i++) {
+    if (x[i].nodeName in my_dict) {
+    	my_dict[x[i].nodeName]++;
+    } else {
+    	my_dict[x[i].nodeName] = 1;
+    }
+  }
+
+  for (const property in my_dict) {
+  	document.write( `${property}: ${my_dict[property]} <br>` );
+  }
+</script>
+  

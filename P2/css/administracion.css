@@ -1,0 +1,18 @@
+h2 {
+  text-align: center;
+  margin: 0px 0px -10px 0px;
+  margin-top: 20px;
+}
+
+#header_form_container_logged {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+.admin_container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}

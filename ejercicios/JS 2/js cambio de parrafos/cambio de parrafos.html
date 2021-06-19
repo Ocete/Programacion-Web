@@ -1,0 +1,16 @@
+<p>Párrafo 1</p>
+
+<a>Esto no es un párrafo</a>
+
+<p>Párrafo 2</p>
+
+
+<script>
+	const parrafos = document.getElementsByTagName("p");
+
+  for (i=0; i<parrafos.length; i++) {
+  	parrafos[i].textContent = "Nuevo contenido";
+    parrafos[i].style.color = "red";
+  }
+</script>
+  
