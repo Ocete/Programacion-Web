@@ -15,6 +15,6 @@
     } else {
       echo 'Campo: '.$campo.' - no se introdujo';
     }
-    echo '<br>'
+    echo '<br>';
   }
 ?>

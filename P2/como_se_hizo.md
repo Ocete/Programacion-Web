@@ -27,6 +27,7 @@ create table if not exists user (
     username varchar(255) not null,
     name varchar(255) not null,
     password varchar(255) not null,
+    admin bool default false, 
     email varchar(255) not null,
     phone int(9),
     profile_picture_path varchar(255) not null,
