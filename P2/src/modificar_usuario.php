@@ -24,6 +24,32 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="../css/estilo.css" />
     <link rel="stylesheet" type="text/css" href="../css/altaitem.css" />
+
+    <?php print_code_for_login_validation() ?>
+
+    <script type="text/javascript">
+
+      function on_submit_modificar_usuario() {
+        var ids = ["username_alta", "name", "old_password",
+                    "email", "phone", "profile_picture_path"];
+
+        var types = ["text", "text", "text",
+                    "email", "phone", "path"];
+
+        // Comprobamos que la nueva contraseña sea correcta
+        // si es que se ha introducido
+        var validation = true;
+        const new_pass = document.getElementById("new_password").value;       
+        if ( new_pass !== '' && !validate_alfanumeric_text(new_pass) ) {
+          alert('La nueva contraseña introducida no es válida.');
+          validation = false;
+        }
+
+        validation = validate(ids, types) && validation; 
+        return validation;
+      }
+
+    </script>
   </head>
 
   <body>
@@ -34,7 +60,8 @@
 
       <h2>Modificación de datos de usuario</h2>
 
-        <form class="form_container" action="modificar_usuario_script.php" method="POST">
+        <form class="form_container" onSubmit="return on_submit_modificar_usuario();"
+            action="modificar_usuario_script.php" method="POST">
 
           <aside class="file_selector">
             <label for="profile_picture_path">Imagen de usuario:   </label><br>
@@ -45,13 +72,13 @@
 
           <aside class="smaller_form_container">
             <label for="text">Nombre de usuario:   </label>
-            <input type="text" name="username" id="username" value=<?php echo '"'.$user['username'].'"' ?>/><br>
+            <input type="text" name="username" id="username_alta" value=<?php echo '"'.$user['username'].'"' ?>/><br>
 
             <label for="text">Nombre:   </label>
             <input type="text" name="name" id="name" value=<?php echo '"'.$user['name'].'"' ?>/><br>
 
             <label for="password">Cambiar contraseña:    </label>
-            <input type="password" name="password" id="password"/><br>
+            <input type="password" name="password" id="new_password"/><br>
 
             <label for="email">Correo: </label>
             <input type="email" name="email" id="email" value=<?php echo '"'.$user['email'].'"' ?>/><br>

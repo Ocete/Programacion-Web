@@ -16,9 +16,7 @@ Una vez conectados a MariaDB con nuestro usuario utilizamos el siguiente comando
 use db77553417_pw2021;
 ```
 
-Necesitaremos tres tablas. Una de usuario, una de series y otra de secciones. El diagrama de la base de datos es el siguiente:
-
-![](db_diagram/diagram.png)
+Necesitaremos tres tablas. Una de usuario, una de series y otra de secciones. El diagrama de la base de datos se puede encontrar [aquí](http://betatun.ugr.es/~pw77553417/pe2/como_se_hizo.pdf).
 
 Creamos la tabla de los usuarios:
 
@@ -477,13 +475,202 @@ Con esta técnica podemos encontrar el id de la siguiente serie. Para el id ante
 
 Finalmente, ocultamos el botón de *Anterior* o *Siguiente* si la respectiva consulta está vacía.
 
+### 12. Pop up sobre elementos mostrando la sección.
 
-# X. Cosas nuevas que he hecho
+Pasamos a la parte de Javascript con la funcionalidad más sencilla: mostrar un pequeño pop-up con la sección del elemento sobre el que pasamos el ratón.
 
-- Usar la sesión no sé si es innovador
-- Utilizar los parametros en la URL para acceder a items y secciones?
-- La paginación en las secciones
+Originalmente se pide mostrar tanto el título como la sección, pero ya que el título siempre se muestra, me remitiré a mostrar la sección. Adicionalmente, solo añadiremos esta funcionalidad en `index.php`. Para añadirla en cualquier otro lugar basta con repetir la misma mecánica.
 
-- Revisar la contraseña antes de cambiar los datos del usuario
+En primer lugar, cuando creamos las cajitas correspondientes a cada serie, necesitamos poder saber el nombre de la sección a partir de su id. Para ello hacemos una rápida consulta al comenzar el archivo y preparamos un diccionario de la forma `[section_id] -> [name]`:
+
+```
+$query2 = 'SELECT * FROM section;';
+$result = compute_query($db, $query2);
+
+$sections = array();
+foreach ($result as $s) {
+    $sections[$s['section_id']] = $s['name'];
+}
+```
+
+Una vez creado este diccionario, basta con añadir el siguiente código dentro de la caja que engloba a cada serie:
+
+```
+foreach ($series as $serie) {
+    echo'
+        [...]
+    
+        <span class="popuptext"> Sección: '.$sections[ $serie['section_id'] ].'</span>
+
+        [...]
+    ';
+}
+```
+
+Así hemos configurado el texto de los pop-ups. Ahora combinaremos Javascript y CSS para hacer que aparezcan y desaparezcan. Como podemos ver en el código anterior, se le ha asociado al texto del pop-up que mostraremos la clase `popuptext`. Por otro lado, al contenedor que engloba a cada serie añadiremos la clase `popup` y un par de *EventListeners*: `onmouseover` y `onmouseout`:
+
+```
+foreach ($series as $serie) {
+    echo'
+        <a class="movie_box popup"
+                onmouseover="show_pop_up(this)"
+                onmouseout="hide_pop_up(this)"
+                href="src/item.php?id='.$serie['serie_id'].'">
+    
+            <span class="popuptext"> Sección: '.$sections[ $serie['section_id'] ].'</span>
+
+            [...]
+        </a>
+    ';
+}
+```
+
+Gestionamos los eventos con el siguiente código en Javascript añadido al `<header>`:
+
+```
+<script type="text/javascript">
+    function show_pop_up(elem) {
+        elem.classList.add('show');
+    }
+
+    function hide_pop_up(elem) {
+        elem.classList.remove('show');
+    }
+</script>
+```
+
+De esta forma añadimos y quitamos una nueva clase dinámicamente utilizando el DOM al contenedor `<a>`. Utilizando CSS podemos verificar si un cierto objeto tiene una clase y su padre tiene otra. En particular:
+
+```
+.show .popuptext {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+```
+
+Estas reglas de estilo solo se aplican a elementos `popuptext` con padre `show`. Me he inspirado en [este tutorial](https://www.w3schools.com/howto/howto_js_popup.asp) para hacer los pop-ups, aunque en el mismo acceden al elemento `<span>` (el popup en sí) utilizando `getElementById()` para cambiarle la clase a él. En vez de eso, yo simplemente se la cambio al padre. Esto nos permite omitir el uso de un identificador para el popup, que es algo más complicado al tener múltiples elementos con popups.
+
+### 13. Verificación de formularios con Javascript
+
+Empezaremos el desarrollo de esta compleja funcionalidad en el login y después los extrapolaremos a los demás formularios. Teniendo en cuenta que vamos a repetir este tipod e comprobaciones a lo largo de todo el sitio web, lo más sencillo será colocar todo lo referente a esta funcionalidad en un archivo aparte e independiente de cada formulario en si, para que sea facilmente escalable a los demás y sencillo de importar desde cualquier sitio. Este archivo será `validate.js`.
+
+En primer lugar, los elementos que necesitaremos para comprobar un único campo del formulario son: el valor del campo, el tipo y su identificador. Aunque el identificador parece no ser necesario, lo utilizaremos para mostrar el campo incorrecto al usuario (normalmente se parsería un mensaje más bonito a partir del mismo, pero nos va a servir para la práctica). El siguiente paso es darse cuenta de que desde Javascript podemos encontrar el valor del input con el id utilizando `document.getElementById( id ).value;`. Asi que nuestra función de validación recibirá dos vectores: uno de los ids y otros de los tipos a comprobar para cada id.
+
+Extraeremos los valores utilizando los ids mediante la siguiente función:
+
+```
+function extract_values_using_ids (ids) {
+    var values = [];
+
+    ids.forEach((id) => {
+        values.push( document.getElementById(id).value );
+    });
+
+    return values;
+}
+```
+
+Utilizamos la función `map` de Javascript para crear un único vector que en cada posición tiene el valor, el id y el tipo de un campo del formulario (parecido a lo que hace `zip`  en Python). Por ejemplo, el formulario de login tienes los campos `username` y `password`. El vector mappeado tendrá los siguientes valores cuando Luigi se loggee:
+
+```
+zipped = [
+    ['luigi', 'username', 'text'],
+    ['luigi123', 'password', 'text']
+]
+```
+
+Ahora recorremos este vector comprobando cada campo independientemente utilizando su tipo. La función de comprobación en su totalidad es la siguiente:
+
+```
+function validate (ids, types) {
+    var msg = '';
+
+    values = extract_values_using_ids(ids);
+
+    var zipped = values.map(function(e, i) {
+        return [e, ids[i], types[i]];
+    });
+
+    zipped.forEach((row) => {
+        value = row[0];
+        id = row[1];
+        type = row[2];
+
+        if (type == 'text') {
+            if ( !validate_alfanumeric_text(value) ) {
+                msg = msg.concat(`\n Texto inválido en ${id}.`);
+            }
+        }
+
+    });
+
+    if (msg !== '') {
+        alert(msg);
+    }
+    return msg === '';
+}
+```
+
+Devuelver verdadero si no hay ningún problema y falso en otro caso, además de mostrar por pantalla los campos donde hay problemas. Como podemos ver, ahora mismo hay unicamente un tipo de comprobación, para los textos, que se realiza con la siguiente función:
+
+```
+function validate_alfanumeric_text (text) {
+    const regex = new RegExp('^[a-zA-Z0-9]+$');
+    return regex.test(text);
+}
+```
+
+Para comprobar otros tipos basta añadir mas funciones de comprobación utilizando las expresiones regulares apropiadas. Una vez tenemos la función de validación preparada tenemos que asegurarnos de que se llama antes de enviar el formulario, y que este no se envíe si la función devuelve *falso*. Para ello añadimos a la cabecera del formulario un *EventListener* que llame a una nuestra función:
+
+```
+<form method="post" onSubmit="return submit_login_form();" 
+    action="/~pw77553417/pe2/src/login.php" id="loginForm" >
+
+----------------------------------------------------------
+
+// Dentro del header añadimos:
+<script src="/~pw77553417/pe2/src/validate.js"></script>
+
+<script type="text/javascript" type="module">
+    function submit_login_form(){
+        var ids = ["username", "password"];
+        var types = ["text", "text"];
+
+        return validate(ids, types);;
+    }
+</script>
+
+```
+
+De esta forma se llama a la función de comprobación antes de enviar el formulario y esta solo se llama si devuelte verdadero. A continuación he añadido estos cambios a todo el sitio web (pues el login aparece en todas las páginas) de forma similar a la que se hizo con `utils_html.php`: añadiendo una línea de código a la cabecera de cada página que añada estas funciones dinámicamente.
+
+Finalmente, utilizamos esta implementación añadiendo nuevos tipos de comprobaciones en `validate.js` para el resto de formularios. En cada uno bastará con tomar los ids con sus tipos y llamar a `validate()`. Los tipos que se han tomado han sido los siguiente:
+
+- Texto alfanumérico (corto): Revisamos que tengo longitud máxima 10 y la siguiente expresión regular: `^[a-zA-Z0-9]+$`.
+- Email: Revisamos  la siguiente expresión regular: `^\\S+@\\S+\\.\\S+$`.
+- Teléfono: Revisamos  la siguiente expresión regular: `^[0-9]{9}$`.
+- Path de archivo: Revisamos  la siguiente expresión regular: `^(.+)\\([^\\]+)$`.
+- Fecha: Revisamos  la siguiente expresión regular: `^[0-9]{4}(\-[0-9]{2}){2}$`.
+- Número (positivo): Revisamos  la siguiente expresión regular: `^^[0-9]+$`.
+- Texto largo con espacios: Revisamos que tengo longitud máxima 1000 y la siguiente expresión regular: `^[ a-zA-Z0-9]+$`.
+
+Hay un par de detalles interesantes a comentar. Por un lado, la expresión regular de path de archivo no se puede crear correctamente con el constructor normal de expresiones regulares: `new RegExp();`. No tengo claro por qué, pero funciona definiéndolo directamente como expresión regular con `/---/`: `const regex = /^(.+)\\([^\\]+)$/ ;`.
+
+Por otro lado, he implementado manualmente una comprobación adicional. Como ya se aclaró al modificar el usuario, no siempre queremos cambiar la contraseña. En este caso, comprobamos si el campo de contraseña está vacío. Si lo está, no realizamos ninguna comprobación sobre la misma (y esta no se modificará al guardar los nuevos cambios). Si la nueva contraseña no está vacía, ejecutamos manualmente `validate_alfanumeric_text()` sobre ella para comprobar que tiene el formato adecuado.
+
+# 14. Cosas innovadores que he hecho
+
+No estoy seguro de que sean innovadoras:
+
+- Usar la sesión no sé si es innovador.
+- Utilizar los parametros en la URL para acceder a items y secciones
+- La paginación en las secciones.
+
+Higlihts:
+
+- Comprobar si el usuario ya está registrado antes de añadirlo a la base de datos.
+- Revisar la contraseña antes de cambiar los datos del usuario.
 - Verificar con cuidado a qué cosas tiene acceso el user y a qué cosas el admin.
-- Iteración sobre todos los items
+- Iteración sobre todos los items.
+- La forma de verificar los formularios es super simple y limpia.

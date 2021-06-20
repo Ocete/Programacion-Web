@@ -3,7 +3,6 @@
   require 'utils.php';
   require 'utils_html.php';
 
-
   // Nos conectamos a la BBDD
   $db = connect_to_db();
 
@@ -66,6 +65,21 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="../css/estilo.css" />
     <link rel="stylesheet" type="text/css" href="../css/item.css" />
+
+    <?php print_code_for_login_validation() ?>
+
+    <script type="text/javascript">
+
+      function on_submit_modificar_item() {
+        var ids = ["title", "section_id", "n_temps", "premiere_date",
+                    "description", "serie_picture_path", "serie_id"];
+
+        var types = ["text", "number", "number", "date", "big-text", "path", "number"];
+
+        return validate(ids, types);
+      }
+
+    </script>
   </head>
 
   <body>
@@ -102,7 +116,8 @@
           ';
         } else {
             echo '
-            <form class="item_container" action="modificar_item.php" method="post">
+            <form class="item_container" onSubmit="return on_submit_modificar_item();"
+                  action="modificar_item.php" method="post">
               <section class="">
                 <img src="../imgs/series/'.$serie['serie_picture_path'].'" class="movie_box_image"
                   alt="'.$serie['title'].'"/><br><br>

@@ -18,6 +18,31 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="../css/estilo.css" />
     <link rel="stylesheet" type="text/css" href="../css/altaitem.css" />
+
+    <?php print_code_for_login_validation() ?>
+
+    <script type="text/javascript">
+
+      function on_submit_signup() {
+        var ids = ["username_alta", "name", "password_alta", "password2",
+                    "email", "phone", "profile_picture_path"];
+
+        var types = ["text", "text", "text", "text",
+                    "email", "phone", "path"];
+
+        var validation = validate(ids, types);
+        if (validation) {
+          validation = document.getElementById('password_alta').value ===
+                        document.getElementById('password2').value;
+
+          if (!validation)
+            alert('Las contraseñas deben coincidir!');
+        }
+
+        return validation;
+      }
+
+    </script>
   </head>
 
   <body>
@@ -28,7 +53,8 @@
 
       <h2>Alta de usuario</h2>
 
-        <form class="form_container" action="altausuario_script.php" method="POST">
+        <form class="form_container" onSubmit="return on_submit_signup();"
+            action="altausuario_script.php" method="POST">
 
           <aside class="file_selector">
             <label for="profile_picture_path">Imagen de usuario:   </label><br>
@@ -39,13 +65,13 @@
 
           <aside class="smaller_form_container">
             <label for="text">Nombre de usuario:   </label>
-            <input type="text" name="username" id="username"/><br>
+            <input type="text" name="username" id="username_alta"/><br>
 
             <label for="text">Nombre:   </label>
             <input type="text" name="name" id="name"/><br>
 
             <label for="password">Contraseña:    </label>
-            <input type="password" name="password" id="password"/><br>
+            <input type="password" name="password" id="password_alta"/><br>
 
             <label for="confirm_password">Confirma Contraseña:    </label>
             <input type="password" name="password2" id="password2"/><br>
@@ -56,7 +82,7 @@
             <label for="tel">Teléfono: </label>
             <input type="tel" name="phone" id="phone"/><br>
 
-            <input type="submit" id="send_button"
+            <input type="submit" id="send_button2"
               class="orange-button submit_button" value="Dar de alta"/>
           </aside>
         </form>

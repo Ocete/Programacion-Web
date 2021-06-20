@@ -90,20 +90,25 @@ form {
 
 /* SEGUNDA PRÁCTICA */
 
-/* The actual popup */
+/* The actual popup (appears on top) */
 .popup .popuptext {
   visibility: hidden;
   width: 160px;
-  background-color: #555;
-  color: #fff;
+  background-color: #F19953;
+  color: black;
   text-align: center;
+  
+  border-style: solid;
   border-radius: 6px;
+  border-color: black;
+  border-width: 1px;
+
   padding: 8px 0;
   position: absolute;
-  z-index: 1;
-  bottom: 125%;
+  bottom: 75%;
   left: 50%;
   margin-left: -80px;
+  z-index: 10;
 }
 
 /* Popup arrow */
@@ -118,9 +123,20 @@ form {
   border-color: #555 transparent transparent transparent;
 }
 
-/* Toggle this class - hide and show the popup */
-.popup .show {
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.show .popuptext {
   visibility: visible;
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
 }

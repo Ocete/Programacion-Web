@@ -12,6 +12,8 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="../css/estilo.css" />
     <link rel="stylesheet" type="text/css" href="../css/contacto.css" />
+
+    <?php print_code_for_login_validation() ?>
   </head>
 
   <body>

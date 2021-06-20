@@ -20,7 +20,6 @@
   }
 ?>
 
-
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
@@ -30,6 +29,21 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="../css/estilo.css" />
     <link rel="stylesheet" type="text/css" href="../css/altaitem.css" />
+
+    <?php print_code_for_login_validation() ?>
+
+    <script type="text/javascript">
+
+      function on_submit_signup() {
+        var ids = ["title", "section_id", "n_temps", "premiere_date",
+                    "description", "serie_picture_path"];
+
+        var types = ["text", "number", "number", "date", "big-text", "path"];
+
+        return validate(ids, types);
+      }
+
+    </script>
   </head>
 
   
@@ -41,7 +55,8 @@
 
       <h2>Añadir serie</h2>
 
-        <form class="form_container" action="altaitem_script.php" method="post">
+        <form class="form_container" onSubmit="return on_submit_signup();"
+            action="altaitem_script.php" method="post">
 
           <aside class="file_selector">
             <label for="serie_picture_path">Logo de la serie:   </label><br>

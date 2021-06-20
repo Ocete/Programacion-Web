@@ -67,6 +67,18 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="../css/estilo.css" />
     <link rel="stylesheet" type="text/css" href="../css/seccion.css" />
+
+    <?php print_code_for_login_validation() ?>
+
+    <script type="text/javascript">
+
+      function on_submit_modificar_seccion() {
+        var ids = ["name"];
+        var types = ["text"];
+        return validate(ids, types);
+      }
+
+    </script>
   </head>
 
   <body>
@@ -83,7 +95,8 @@
             echo '<h2> '.$section_name.' </h2>';
           } else {
             echo'
-              <form action="modificar_seccion.php" method="post">
+              <form onSubmit="return on_submit_modificar_seccion();"
+                    action="modificar_seccion.php" method="post">
                 <input type="text" name="name" id="name" value="'.$section_name.'"/><br>
                 <input type="hidden" id="section_id" name="section_id" value="'.
                     $section_id.'">
@@ -101,8 +114,6 @@
             ';
           }
           
-
-
           echo '<section id="main_page_container">';
           for ($i=0; $i < 3; $i++) { 
             echo '<aside id="column_container">';

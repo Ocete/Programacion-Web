@@ -1,6 +1,21 @@
 <?php
   include_once 'utils.php';
 
+  function print_code_for_login_validation() {
+    echo '
+      <script src="/~pw77553417/pe2/src/validate.js"></script>
+
+      <script type="text/javascript" type="module">
+        function submit_login_form(){
+          var ids = ["username", "password"];
+          var types = ["text", "text"];
+
+          return validate(ids, types);
+        }
+      </script>
+    ';
+  }
+
   function print_header() {
     $path = '';
     if ( !empty($_SESSION['username']) ) {
@@ -40,12 +55,14 @@
               }
             } else {
               echo ' 
-              <form method="post" action="/~pw77553417/pe2/src/login.php">
+              <form method="post" onSubmit="return submit_login_form();" 
+                  action="/~pw77553417/pe2/src/login.php" id="loginForm" >
+
                 <label for="user">Usuario:   </label>
-                <input type="text" name="username" id="username" required/><br>
+                <input type="text" name="username" id="username"/><br>
 
                 <label for="password">Contraseña:   </label>
-                <input type="password" name="password" id="password" required/><br>
+                <input type="password" name="password" id="password"/><br>
 
                 <input type="submit" id="send_button"
                   class="blue-button submit_button" value="Enviar"/>
