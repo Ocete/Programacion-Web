@@ -1,68 +1,67 @@
 <?php
-  $campos = array('username',
-                  'name',
-                  'password',
-                  'password2',
-                  'email',
-                  'phone',
-                  'image');
+  session_start();
+  require 'utils.php';
+  require 'utils_html.php';
 
-
-  $campos_requeridos_vacios = array();
-
-  foreach ( $campos as $campo ) {
-    if ( array_key_exists( $campo, $_POST ) and $_POST[$campo] !== '' ) {
-      // echo 'Campo: '.$campo.'. Valor: '.$_POST[$campo].'.';
-    } else {
-      echo 'Campo: '.$campo.' -> no se introdujo';
-      array_push($campos_requeridos_vacios, $campo);
-    }
-    echo '<br>';
+  // Si el usuario ya está loggeado lo devolvemos al inicio
+  if ( !empty($_SESSION['user']) ) {
+    back_to_index();
   }
-
-  // Comprobamos los campos
-
-  if ( empty($campos_requeridos_vacios) ) {
-    echo 'Todos los campos han sido rellenados!';
-  } else {
-    echo 'Los siguientes campos no han sido rellenados correctamente:';
-    echo '<br>';
-    foreach ( $campos_requeridos_vacios as $campo ) {
-      echo $campo.'<br>';
-    }
-    exit();
-  }
-
-  echo '<br><br>';
-
-  $dsn = "mysql:host=betatun.ugr.es;dbname=db77553417_pw2021";
-  $usuario= "pw77553417";
-  $password= "77553417";
-
-  try {
-    $conexion = new PDO( $dsn, $usuario, $password );
-    //$conexion->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-  } catch ( PDOException $e ) {
-    echo "Conexión fallida: " . $e->getMessage();
-    exit();
-  }
-
-  $consultaSQL = "SELECT username FROM user";
-  $resultados = $conexion->query( $consultaSQL );
-  try {
-    $conexion->query( $consultaSQL );
-  } catch ( PDOException $e ) {
-    echo "Consulta fallida: " . $e->getMessage();
-    exit();
-  }
-
-  foreach ( $resultados as $fila ) {
-    if ($fila["username"] == $_POST["username"]) {
-      echo "Nombre de usuario ya existente!";
-      echo exit();
-    }
-  }
-
-  echo "<br>fin!<br>";
-
 ?>
+
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Trirong">
+    <title>Netflix</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../css/estilo.css" />
+    <link rel="stylesheet" type="text/css" href="../css/altaitem.css" />
+  </head>
+
+  <body>
+    <?php print_header(); ?>
+
+    <main>
+      <?php print_nav_bar(); ?>
+
+      <h2>Alta de usuario</h2>
+
+        <form class="form_container" action="altausuario_script.php" method="POST">
+
+          <aside class="file_selector">
+            <label for="profile_picture_path">Imagen de usuario:   </label><br>
+            <input name="profile_picture_path"
+                   id="profile_picture_path" type="file"
+                   value="Seleccionar imagen" />
+          </aside>
+
+          <aside class="smaller_form_container">
+            <label for="text">Nombre de usuario:   </label>
+            <input type="text" name="username" id="username"/><br>
+
+            <label for="text">Nombre:   </label>
+            <input type="text" name="name" id="name"/><br>
+
+            <label for="password">Contraseña:    </label>
+            <input type="password" name="password" id="password"/><br>
+
+            <label for="confirm_password">Confirma Contraseña:    </label>
+            <input type="password" name="password2" id="password2"/><br>
+
+            <label for="email">Correo: </label>
+            <input type="email" name="email" id="email"/><br>
+
+            <label for="tel">Teléfono: </label>
+            <input type="tel" name="phone" id="phone"/><br>
+
+            <input type="submit" id="send_button"
+              class="orange-button submit_button" value="Dar de alta"/>
+          </aside>
+        </form>
+      </main>
+
+    <?php print_footer(); ?>
+  </body>
+</html>
